@@ -9,6 +9,16 @@ export default defineConfig({
 			social: {
 				github: 'https://github.com/withastro/starlight',
 			},
+			sidebar: [
+				{ label: 'Introduction', link: '/' },
+				{
+					label: 'Principles',
+					autogenerate: { directory: 'principles' },
+				},
+				{ label: 'Blog', link: '/blog' },
+			],
 		}),
 	],
+	site: "https://g-wijma.github.io",
+  	base: '/astro-starlight/'
 });

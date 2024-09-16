@@ -1,0 +1,27 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import fetchApi from "../../lib/strapi";
+import type Blog from "../../interfaces/blog";
+import { resolveRichText } from "../../lib/richtext";
+
+export async function getStaticPaths() {
+  const blogs = await fetchApi<Blog[]>({
+    endpoint: "blogs",
+    wrappedByKey: "data",
+  });
+
+  return blogs.map((blog) => ({
+    params: { slug: blog.Title },
+    props: blog,
+  }));
+}
+type Props = Blog;
+
+const blog = Astro.props;
+---
+
+<StarlightPage frontmatter={{ title: blog.Title }}
+
+      <Fragment set:html={resolveRichText(blog.Body)} />
+
+</StarlightPage>

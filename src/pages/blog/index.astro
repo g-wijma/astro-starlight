@@ -1,0 +1,29 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import fetchApi from "../../lib/strapi";
+import type Blog from "../../interfaces/blog";
+import { resolveRichText } from "../../lib/richtext";
+
+const blogs = await fetchApi<Blog[]>({
+	endpoint: "blogs", // the content type to fetch
+	wrappedByKey: "data", // the key to unwrap the response
+});
+---
+
+<StarlightPage frontmatter={{ title: 'Blog' }}
+>
+<ul>
+  {
+    blogs.map((blog) => (
+      <li>
+        <h2>
+          <a href={"./blog/" + blog.Title}>{blog.Title}</a>
+        </h2>
+        <Fragment
+          set:html={resolveRichText(blog.Body)}
+        />
+      </li>
+    ))
+  }
+</ul>
+</StarlightPage>
