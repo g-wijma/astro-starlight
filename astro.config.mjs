@@ -15,7 +15,7 @@ export default defineConfig({
 					label: 'Principles',
 					autogenerate: { directory: 'principles' },
 				},
-				{ label: 'Blog', link: '/blog' },
+				{ label: 'Blog', link: '/blog/' },
 			],
 		}),
 	],
