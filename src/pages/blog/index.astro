@@ -10,19 +10,17 @@ const blogs = await fetchApi<Blog[]>({
 });
 ---
 
-<StarlightPage frontmatter={{ title: 'Blog' }}
+<StarlightPage frontmatter={{ title: 'Blog', tableOfContents: false, prev: false, next: false }}
 >
 <ul>
   {
     blogs.map((blog) => (
-      <li>
         <h2>
           <a href={"./" + blog.Title}>{blog.Title}</a>
         </h2>
         <Fragment
           set:html={resolveRichText(blog.Body)}
         />
-      </li>
     ))
   }
 </ul>

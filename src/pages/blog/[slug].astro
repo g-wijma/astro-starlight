@@ -21,6 +21,7 @@ const blog = Astro.props;
 ---
 
 <StarlightPage frontmatter={{ title: blog.Title }}
+              headings={[{ depth: 2, slug: "video", text: "Video"}, { depth: 2, slug: "manifesto", text: "Manifesto"}]}>
 
       <Fragment set:html={resolveRichText(blog.Body)} />
 

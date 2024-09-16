@@ -39,7 +39,10 @@ export function resolveRichText(nodes: StrapiRichTextNode[]) {
   
     switch (node.type) {
       case 'heading':
-        html = `<h${node.level}>${children}</h${node.level}>`;
+        if (children.indexOf('<') == -1 && children.indexOf('"') == -1)
+          html = `<h${node.level} id="${children.toLowerCase()}">${children}</h${node.level}>`;
+        else
+          html = `<h${node.level}>${children}</h${node.level}>`;
         break;
       case 'text':
         if (node.text) {
